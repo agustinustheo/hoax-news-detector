@@ -95,8 +95,8 @@ def cleanMe(html):
 
 webpage = str(urllib.request.urlopen('https://www.washingtonpost.com/powerpost/no-cave-trump-pelosi-vow-not-to-yield-in-government-shutdown-standoff/2019/01/22/1b6258bc-1e4b-11e9-8e21-59a09ff1e2a1_story.html?noredirect=on&utm_term=.2e3bfa71c3d5').read())
 cleantext = cleanMe(webpage)
-cleantext = re.sub(r'\\([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])\\([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])\\([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])', '', cleantext)
-cleantext = re.sub(r'\\([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])\\([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])', '', cleantext)
+cleantext = re.sub(r'\\([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])\\([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])\\([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])', ' ', cleantext)
+cleantext = re.sub(r'\\([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])\\([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])([a-z]|[A-Z]|[0-9])', ' ', cleantext)
 cleantext = preproccess_text(cleantext)
 
 # indonesian_sent_tokenizer_f = open("indonesian_sent_tokenizer.pickle", "rb")
