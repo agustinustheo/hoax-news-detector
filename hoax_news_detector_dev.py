@@ -105,8 +105,42 @@ def find_similar_articles(news):
 		for f in features:
 			dist = euclidean_distances(features[0], f)
 
-		if dist < 2.5:
+		if dist < 1:
 			found_similar_article = found_similar_article + 1
+	
+	# news_article_text = preproccess_text(news_article.text)
+	# news_article_text = news_title_tokenization(news_article_text)
+
+	# article_result_string = ""
+	# for w in news_article_text:
+	# 	article_result_string = article_result_string + w + " "
+
+	# found_similar_article_body = 0
+	# search_result_link = search(search_title, tld="com", num=10, stop=1, pause=2)
+	# for link in search_result_link:
+	# 	check_news_article = Article(link)
+	# 	check_news_article.download()
+	# 	check_news_article.parse()
+		
+	# 	check_news_article_text = preproccess_text(check_news_article.text)
+	# 	check_news_article_text = news_text_tokenization(check_news_article_text)
+
+	# 	check_article_result_string = ""
+	# 	for w in check_news_article_text:
+	# 		check_article_result_string = check_article_result_string + w + " "
+		
+	# 	article_corpus = []
+	# 	article_corpus.append(article_result_string)
+	# 	article_corpus.append(check_article_result_string)
+		
+	# 	article_vectorizer = CountVectorizer()
+	# 	article_features = article_vectorizer.fit_transform(article_corpus).todense()
+
+	# 	for f in article_features:
+	# 		article_dist = euclidean_distances(article_features[0], f)
+
+	# 	if article_dist < 0:
+	# 		found_similar_article = found_similar_article - 1
 
 	if found_similar_article > 1:
 		print('Found similar article titles!')
@@ -115,4 +149,4 @@ def find_similar_articles(news):
 	else:
 		print('No similar article titles found!')
 
-find_similar_articles("https://www.washingtonpost.com/powerpost/no-cave-trump-pelosi-vow-not-to-yield-in-government-shutdown-standoff/2019/01/22/1b6258bc-1e4b-11e9-8e21-59a09ff1e2a1_story.html?noredirect=on&utm_term=.deb595387de7")
+find_similar_articles("https://www.politico.com/story/2019/01/23/trump-government-shutdown-approval-rating-1119877")
