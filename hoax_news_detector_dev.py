@@ -16,7 +16,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 stopwords = nltk.corpus.stopwords.words('english')
 
 def preproccess_text(text_messages):
-	# change words to lower case - Hello, HELLO, hello are all the same word
+	# change words to lower case
 	processed = text_messages.lower()
 
 	# Remove remove unnecessary noise
@@ -40,18 +40,25 @@ def remove_unnecessary_noise(text_messages):
 	return text_messages
 
 def clean_article(html):
-    soup = BeautifulSoup(html, features="lxml") # create a new bs4 object from the html data loaded
-    for script in soup(["script", "style"]): # remove all javascript and stylesheet code
+	 # create a new bs4 object from the html data loaded
+    soup = BeautifulSoup(html, features="lxml")
+
+	 # remove all javascript and stylesheet code
+    for script in soup(["script", "style"]):
         script.extract()
-    # get text
-    text = soup.get_text()
+
+    # get content
+    content = soup.get_text()
+
     # break into lines and remove leading and trailing space on each
-    lines = (line.strip() for line in text.splitlines())
+    lines = (line.strip() for line in content.splitlines())
+
     # break multi-headlines into a line each
     chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+	
     # drop blank lines
-    text = '\n'.join(chunk for chunk in chunks if chunk)
-    return text
+    content = '\n'.join(chunk for chunk in chunks if chunk)
+    return content
 
 def news_title_tokenization(message):
 	tokenized_news_title = []
@@ -108,39 +115,39 @@ def find_similar_articles(news):
 		if dist < 1:
 			found_similar_article = found_similar_article + 1
 	
-	# news_article_text = preproccess_text(news_article.text)
-	# news_article_text = news_title_tokenization(news_article_text)
+	news_article_text = preproccess_text(news_article.text)
+	news_article_text = news_title_tokenization(news_article_text)
 
-	# article_result_string = ""
-	# for w in news_article_text:
-	# 	article_result_string = article_result_string + w + " "
+	article_result_string = ""
+	for w in news_article_text:
+		article_result_string = article_result_string + w + " "
 
-	# found_similar_article_body = 0
-	# search_result_link = search(search_title, tld="com", num=10, stop=1, pause=2)
-	# for link in search_result_link:
-	# 	check_news_article = Article(link)
-	# 	check_news_article.download()
-	# 	check_news_article.parse()
+	found_similar_article_body = 0
+	search_result_link = search(search_title, tld="com", num=10, stop=1, pause=2)
+	for link in search_result_link:
+		check_news_article = Article(link)
+		check_news_article.download()
+		check_news_article.parse()
 		
-	# 	check_news_article_text = preproccess_text(check_news_article.text)
-	# 	check_news_article_text = news_text_tokenization(check_news_article_text)
+		check_news_article_text = preproccess_text(check_news_article.text)
+		check_news_article_text = news_text_tokenization(check_news_article_text)
 
-	# 	check_article_result_string = ""
-	# 	for w in check_news_article_text:
-	# 		check_article_result_string = check_article_result_string + w + " "
+		check_article_result_string = ""
+		for w in check_news_article_text:
+			check_article_result_string = check_article_result_string + w + " "
 		
-	# 	article_corpus = []
-	# 	article_corpus.append(article_result_string)
-	# 	article_corpus.append(check_article_result_string)
+		article_corpus = []
+		article_corpus.append(article_result_string)
+		article_corpus.append(check_article_result_string)
 		
-	# 	article_vectorizer = CountVectorizer()
-	# 	article_features = article_vectorizer.fit_transform(article_corpus).todense()
+		article_vectorizer = CountVectorizer()
+		article_features = article_vectorizer.fit_transform(article_corpus).todense()
 
-	# 	for f in article_features:
-	# 		article_dist = euclidean_distances(article_features[0], f)
+		for f in article_features:
+			article_dist = euclidean_distances(article_features[0], f)
 
-	# 	if article_dist < 0:
-	# 		found_similar_article = found_similar_article - 1
+		if article_dist < 0:
+			found_similar_article = found_similar_article - 1
 
 	if found_similar_article > 1:
 		print('Found similar article titles!')
