@@ -2,12 +2,10 @@ import re
 import bs4
 import lxml
 import nltk
-import pickle
-import urllib.request
 from google import google
-from googlesearch import search 
 from newspaper import Article
 from bs4 import BeautifulSoup
+from googlesearch import search 
 from nltk.stem import PorterStemmer
 from nltk.tokenize import word_tokenize, sent_tokenize
 from sklearn.metrics.pairwise import euclidean_distances

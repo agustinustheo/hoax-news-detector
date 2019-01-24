@@ -2,7 +2,6 @@ import re
 import bs4
 import lxml
 import nltk
-import pickle
 import urllib.request
 from google import google
 from googlesearch import search 
