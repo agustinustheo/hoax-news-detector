@@ -5,3 +5,6 @@ unidecode
 vcrpy
 future
 fake-useragent
+newspaper3k
+sklearn
+git+https://github.com/abenassi/Google-Search-API
